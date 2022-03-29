@@ -1,0 +1,21 @@
+﻿body {
+
+    margin: 0 auto;
+
+}
+
+button{
+    margin:5px 5px 5px 5px;
+    padding: 10px;
+    background: yellow;
+}
+
+#Resultado{
+
+    border:solid;
+    padding: 10px;
+    text-align: center;
+
+}
+
+

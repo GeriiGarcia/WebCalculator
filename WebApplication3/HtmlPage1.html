@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="JavaScript.js"></script>
+    <link rel="stylesheet" type="text/css" href="./StyleSheet1.css" />
+    <title></title>
+    <link rel="stylesheet" href="StyleSheet1.css">
+
+    <script>
+
+        var num1=0;
+        var num2=0;
+        var result=false;
+        var clicks = 0;
+        var op = 0;
+        var controlSegundo = false;
+        var resultado = 0;
+
+
+        function queOp(car) {
+            if (car == 0)
+                op = 0;
+            else if (car == 1) {
+                op = 1;
+                document.getElementById("Resultado").innerHTML = "+";
+            }
+            else if (car == 2) {
+                op = 2;
+                document.getElementById("Resultado").innerHTML = "-";
+            }
+            else if (car == 3) {
+                op = 3;
+                document.getElementById("Resultado").innerHTML = "/";
+            }
+            else if (car == 4) {
+                op = 4;
+                document.getElementById("Resultado").innerHTML = "x";
+            }
+            else if (car == 5) {
+                operation(num1, num2, clicks, op);
+                num1 = resultado;
+                num2 = 0;
+                controlSegundo = false;
+                queOp(0);
+            }
+            else if (car == 6) {
+                num1 = 0;
+                num2 = 0;
+                controlSegundo = false;
+                queOp(0);
+                clicks = 0;
+                document.getElementById("Resultado").innerHTML = "0";
+            }
+
+        }
+
+        function operation(uno, dos, bol, opp) {
+            
+            if ((op != 0)) {
+                if (opp == 1) {
+                    resultado = uno + dos;
+                    document.getElementById("Resultado").innerHTML = resultado;
+                }
+
+                else if (opp == 2) {
+                    resultado = uno - dos;
+                    document.getElementById("Resultado").innerHTML = resultado;
+                }
+
+                else if (opp == 3) {
+                    if (dos != 0) {
+                        resultado = uno / dos;
+                        document.getElementById("Resultado").innerHTML = resultado;
+                    }
+                    else
+                        document.getElementById("Resultado").innerHTML = "Error: división por cero";
+                }
+                else if (opp == 4) {
+                    resultado = uno * dos;
+                    document.getElementById("Resultado").innerHTML = resultado;
+                }
+            }
+            else {
+                document.getElementById("Resultado").innerHTML = "Wtf bro";
+            }
+        }
+
+        function output1(num) {
+
+            if (clicks == 0) {
+                num1 = num;
+                clicks++;
+                document.getElementById("Resultado").innerHTML = num1;
+            }
+            else if ((op != 0) && (controlSegundo == false)) {
+                num2 = num;
+                clicks++;
+                document.getElementById("Resultado").innerHTML = num2;
+                controlSegundo=true;
+            }
+            else if ((op == 0) && (controlSegundo == false)) {
+                num1 = num1 * 10 + num;
+                clicks++;
+                document.getElementById("Resultado").innerHTML = num1;
+            }
+            else {
+                num2 = num2 * 10 + num;
+                document.getElementById("Resultado").innerHTML = num2;
+            }
+
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <p id="Resultado">Hola</p>
+
+    <button id="uno" type="button" onclick="output1(1);">1</button>
+    <button id="dos" type="button" onclick="output1(2);">2</button>
+    <button id="tres" type="button" onclick="output1(3);">3</button>
+    <button id="sumar" type="button" onclick="queOp(1)">+</button>
+
+    <br />
+
+    <button id="cuatro" type="button" onclick="output1(4);">4</button>
+    <button id="cinco" type="button" onclick="output1(5);">5</button>
+    <button id="seis" type="button" onclick="output1(6);">6</button>
+    <button id="restar" type="button" onclick="queOp(2)">-</button>
+
+    <br />
+
+    <button id="siete" type="button" onclick="output1(7);">7</button>
+    <button id="ocho" type="button" onclick="output1(8);">8</button>
+    <button id="nueve" type="button" onclick="output1(9);">9</button>
+    <button id="dividir" type="button" onclick="queOp(3)">/</button>
+
+    <br />
+
+    <button id="uno" type="button" onclick="output1(0);">0</button>
+    <button id="AC" type="button" onclick="queOp(6)">AC</button>
+    <button id="multipicar" type="button" onclick="queOp(4)">x</button>
+    <button id="igualar" type="button" onclick="queOp(5)">=</button>
+
+</body>
+</html>
