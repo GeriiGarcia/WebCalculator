@@ -9,39 +9,58 @@
 
     <script>
 
-        var num1=0;
-        var num2=0;
-        var result=false;
+        var num1 = 0;
+        var num2 = 0;
+        var result = false;
         var clicks = 0;
         var op = 0;
         var controlSegundo = false;
-        var resultado = 0;
+        var resultado = 0, contDig = 0;
 
+        function decimal(num) {
+            if (op == 7) {
+                contDig++;
+                clicks = 1;
+                queOp(0);
+                num1 = num1 + num2*0.1
+                document.getElementById("Resultado").innerHTML = num1, ",", num2;
+                num2 = 0;
+            }
+        }
 
         function queOp(car) {
             if (car == 0)
                 op = 0;
             else if (car == 1) {
-                op = 1;
                 document.getElementById("Resultado").innerHTML = "+";
+                if (op != 0)
+                    queOp(5);
+                op = 1;
             }
             else if (car == 2) {
-                op = 2;
                 document.getElementById("Resultado").innerHTML = "-";
+                if (op != 0)
+                    queOp(5);
+                op = 2;
             }
             else if (car == 3) {
-                op = 3;
                 document.getElementById("Resultado").innerHTML = "/";
+                if (op != 0)
+                    queOp(5);
+                op = 3;
             }
             else if (car == 4) {
-                op = 4;
                 document.getElementById("Resultado").innerHTML = "x";
+                if (op != 0)
+                    queOp(5);
+                op = 4;
             }
             else if (car == 5) {
                 operation(num1, num2, clicks, op);
                 num1 = resultado;
                 num2 = 0;
                 controlSegundo = false;
+                contDig = 0;
                 queOp(0);
             }
             else if (car == 6) {
@@ -50,13 +69,17 @@
                 controlSegundo = false;
                 queOp(0);
                 clicks = 0;
+                contDig = 0;
                 document.getElementById("Resultado").innerHTML = "0";
             }
-
+            else if (car == 7) {
+                op = 7;
+                
+            }
         }
 
         function operation(uno, dos, bol, opp) {
-            
+
             if ((op != 0)) {
                 if (opp == 1) {
                     resultado = uno + dos;
@@ -87,17 +110,18 @@
         }
 
         function output1(num) {
+          
 
             if (clicks == 0) {
                 num1 = num;
                 clicks++;
                 document.getElementById("Resultado").innerHTML = num1;
             }
-            else if ((op != 0) && (controlSegundo == false)) {
+            else if ((op != 0) && (controlSegundo == false) && (op==7)) {
                 num2 = num;
                 clicks++;
                 document.getElementById("Resultado").innerHTML = num2;
-                controlSegundo=true;
+                controlSegundo = true;
             }
             else if ((op == 0) && (controlSegundo == false)) {
                 num1 = num1 * 10 + num;
@@ -107,6 +131,8 @@
             else {
                 num2 = num2 * 10 + num;
                 document.getElementById("Resultado").innerHTML = num2;
+                contDig++;
+                decimal(num1);
             }
 
         }
@@ -141,8 +167,8 @@
 
     <br />
 
-    <button id="cero" type="button" onclick="output1(0);">0</button>
-    <button id="coma" type="button">,</button>
+    <button id="cero" type="button" onclick="output1(0)">0</button>
+    <button id="coma" type="button" onclick="queOp(7)">,</button>
     <button id="AC" type="button" onclick="queOp(6)">AC</button>
     <button id="multipicar" type="button" onclick="queOp(4)">x</button>
     <button id="igualar" type="button" onclick="queOp(5)">=</button>
