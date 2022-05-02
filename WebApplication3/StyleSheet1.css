@@ -1,18 +1,25 @@
 ﻿body {
 
-    margin: 0 auto;
+    left: 15px;
+    
 
+}
+
+div{
+    text-align: center;
 }
 
 button{
     margin:5px 5px 5px 5px;
     padding: 10px;
     background: yellow;
+    border-radius: 5px;
 }
 
 #Resultado{
 
     border:solid;
+    border-color: yellow;
     padding: 10px;
     text-align: center;
 
